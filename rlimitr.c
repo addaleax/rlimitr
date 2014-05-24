@@ -18,8 +18,8 @@
 
 /*
  * 2 simple versions to compile this stuff:
- * gcc -O2 -o rlimitr rlimitr.c
- * gcc -O2 -shared -DRLIMITR_LIBRARY_ONLY -o rlimitr.so rlimitr.c
+ * gcc -fPIC -O2 -o rlimitr rlimitr.c
+ * gcc -fPIC -O2 -shared -DRLIMITR_LIBRARY_ONLY -o rlimitr.so rlimitr.c
  */
 
 #include <stdlib.h>
