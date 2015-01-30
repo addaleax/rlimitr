@@ -230,6 +230,16 @@ static struct rlimitr_entry entries[] = {
 #ifdef RLIMIT_STACK
 	__R(RLIMIT_STACK),
 #endif
+/* from setrlimit(2freebsd) */
+#ifdef RLIMIT_SBSIZE
+	__R(RLIMIT_SBSIZE),
+#endif
+#ifdef RLIMIT_SWAP
+	__R(RLIMIT_SWAP),
+#endif
+#ifdef RLIMIT_NTPS
+	__R(RLIMIT_NTPS),
+#endif
 	(struct rlimitr_entry){0, NULL}
 };
 
