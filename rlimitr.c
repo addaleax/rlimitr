@@ -99,7 +99,7 @@ static void rlimitr_set(struct rlimitr_entry* entry, const char* value) {
 
 	eptr = strchr(value, ':');
 	
-	assert(eptr >= value);
+	assert(!eptr || eptr >= value);
 	if (strncmp(value, rlim_infty_name, eptr ? (size_t)(eptr-value) : strlen(value)) == 0) {
 		v = RLIM_INFINITY;
 	} else {
@@ -279,10 +279,10 @@ int main(int argc, char** argv) {
 "rlimitr -- set/get resource limits\n"
 "\n"
 "Usage:\n"
-"\trlimitr [NAME=[VALUE]] ... [command [args] ...]\n"
+"\trlimitr [NAME=[VALUE]] ... [--] [command [args] ...]\n"
 "\trlimitr [--help|--version]\n"
 "\n"
-"The command line environment is actually inspired a bit by env(1),\n"
+"The command line interface is actually inspired a bit by env(1),\n"
 "so you can usually use it very similarily to env.\n"
 "\tNAME=[VALUE]     Set the resource limit identified by NAME to VALUE;\n"
 "\t                 for possible formats for VALUE see below.\n"
@@ -306,7 +306,7 @@ int main(int argc, char** argv) {
 "\t* '-' indicates decrementing the limit.\n"
 "\t* If none of '+' or '-' is given, the argument will be interpreted\n"
 "\t  as an absolute value.\n"
-"\t* number may be any decimal number, an octal starting by '0'\n"
+"\t* number may be any decimal number, an octal value starting with '0'\n"
 "\t  or a hexadecimal value starting with '0x'\n"
 "\t  (using strtol(3) with 0 as the base argument).\n"
 "\t  Suffixes to number may be K, KB, M, MB, G etc., respectively\n"
@@ -320,7 +320,7 @@ int main(int argc, char** argv) {
 "\trlimitr RLIMIT_AS=s50M:h50M ls\n"
 "\t  runs ls with a maximum address space of 50 MB (0x3200000 bytes)\n"
 "\t  (whyever you should want to do this to poor ls... ;-))\n"
-"Also you may choose to give arguments to rlimitr via the environment\n"
+"Also, you may choose to give arguments to rlimitr via the environment\n"
 "for whatever reason you want. (So, the above would essentially be\n"
 "equivalent to `env RLIMIT_AS=s50M:h50M rlimitr ls`.)\n"
 "For anything else you should probably consult the manpage(s) mentioned above.\n"
@@ -337,9 +337,16 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
+	int nextArgumentIsExec = 0;
 	for (i = 1; i < argc; ++i) {
 		eq = strchr(argv[i], '=');
-		if (!eq) {
+		if (!eq || nextArgumentIsExec) {
+			/* pass everything after -- to execvp() */
+			if (strcmp(argv[i], "--") == 0) {
+				nextArgumentIsExec = 1;
+				continue;
+			}
+			
 			execvp(argv[i], argv+i);
 			perror("execvp()");
 			return 1;
