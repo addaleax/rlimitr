@@ -31,7 +31,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 
-#define RLIMITR_VERSION "0.1.0"
+#define RLIMITR_VERSION "0.1.1"
 
 #ifndef __GNUC__
 #define __attribute__()
