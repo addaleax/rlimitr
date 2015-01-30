@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <assert.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 
@@ -97,7 +98,9 @@ static void rlimitr_set(struct rlimitr_entry* entry, const char* value) {
 	}
 
 	eptr = strchr(value, ':');
-	if (strncmp(value, rlim_infty_name, eptr ? eptr-value : strlen(value)) == 0) {
+	
+	assert(eptr >= value);
+	if (strncmp(value, rlim_infty_name, eptr ? (size_t)(eptr-value) : strlen(value)) == 0) {
 		v = RLIM_INFINITY;
 	} else {
 		v = strtol(value, &eptr, 0);
