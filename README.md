@@ -1,6 +1,8 @@
 rlimitr
 =======
 
+[![Build Status](https://travis-ci.org/addaleax/rlimitr.png?style=flat)](https://travis-ci.org/addaleax/rlimitr)
+
 get/set resource limits on command line in env(1)-style.
 
 Usage
