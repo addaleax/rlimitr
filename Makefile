@@ -15,3 +15,6 @@ rlimitr: rlimitr.c
 
 install: rlimitr
 	cp rlimitr $(PREFIX)/bin/rlimitr
+
+test: rlimitr rlimitr.so
+	./test.sh
