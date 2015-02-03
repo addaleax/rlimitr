@@ -1,5 +1,9 @@
 language: c
-script: make clean && make && make test && make clean
+script: make clean && make && make test && make clean && make coverage
 compiler:
   - clang
   - gcc
+before_install:
+  - sudo pip install cpp-coveralls
+after_success:
+  - coveralls --gcov-options '\-lp'
