@@ -1,6 +1,12 @@
 CC?=gcc
-CFLAGS+=-Wall -Wextra -fPIC -O2
+CFLAGS+=-Wall -Wextra -fPIC
 PREFIX=`[ -e /usr/local/bin ] && echo '/usr/local' || echo '/usr'`
+
+ifeq ($(DEBUG),1)
+	CFLAGS+=-g
+else
+	CFLAGS+=-O2
+endif
 
 all: rlimitr.so rlimitr
 
@@ -20,4 +26,4 @@ test: rlimitr.so rlimitr
 	./test.sh
 
 coverage: clean
-	CFLAGS="--coverage" CC=gcc make test
+	DEBUG=1 CFLAGS="--coverage" CC=gcc make test
