@@ -1,7 +1,8 @@
 rlimitr
 =======
 
-[![Build Status](https://travis-ci.org/addaleax/rlimitr.png?style=flat)](https://travis-ci.org/addaleax/rlimitr)
+[![Build Status](https://travis-ci.org/addaleax/rlimitr.png?style=flat&branch=master)](https://travis-ci.org/addaleax/rlimitr?branch=master)
+[![Coverage Status](https://coveralls.io/repos/addaleax/rlimitr/badge.svg?branch=master)](https://coveralls.io/r/addaleax/rlimitr?branch=master)
 
 get/set resource limits on command line in env(1)-style.
 
