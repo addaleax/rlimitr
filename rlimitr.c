@@ -360,7 +360,7 @@ int main(int argc, char** argv) {
 				break;
 		}
 		if (!it->name) { /* failed to find any */
-			fprintf(stderr, "No such resource name: %s\n", argv[i]);
+			fprintf(stderr, "Error: No such resource name: %s\n", argv[i]);
 			return 2;
 		}
 
