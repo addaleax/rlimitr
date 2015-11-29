@@ -17,3 +17,6 @@
 *.out
 *.app
 rlimitr
+rlimitr.c.gcov
+rlimitr.gcda
+rlimitr.gcno

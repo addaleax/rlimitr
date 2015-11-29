@@ -1,6 +1,6 @@
 /*
  * rlimitr - get/set resource limits via setrlimit(3)
- * Copyright (C) 2010 Hauke Henningsen
+ * Copyright (C) 2010 Anna Henningsen
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -329,7 +329,7 @@ int main(int argc, char** argv) {
 	} else if (argc > 1 && strcmp(argv[1], "--version") == 0) {
 		printf(
 "rlimitr " RLIMITR_VERSION "\n"
-"Copyright (C) 2010 Hauke Henningsen\n"
+"Copyright (C) 2010 Anna Henningsen\n"
 "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n"
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law.\n"
