@@ -3,7 +3,9 @@ script: make clean && make && make test && make clean && make coverage
 compiler:
   - clang
   - gcc
+sudo: false
 before_install:
-  - sudo pip install cpp-coveralls
+  - export "PATH=$HOME/.local/bin:$PATH"
+  - pip install --user cpp-coveralls
 after_success:
   - coveralls --gcov-options '\-lp'
